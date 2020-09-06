@@ -10,7 +10,7 @@ import random
 import math
 
 
-def collage(directory, save):
+def collage(conf, directory, save):
     images = os.listdir(directory)
 
     if not (os.path.isdir("results/")):
@@ -22,7 +22,7 @@ def collage(directory, save):
     rows = int(math.ceil(float(len(images)) / float(cols)))
 
     random.shuffle(images)
-    (w, h) = (400, 400)
+    (w, h) = (conf["collage"]["height"], conf["collage"]["width"])
 
     (width, height) = (w * cols, h * rows)
 

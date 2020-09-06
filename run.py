@@ -1,29 +1,30 @@
 import conceal
 
-w = 500
-h = 500
+conf = conceal.config("conceal.toml")
+conceal.normall(conf, "img_set1_wa")
 
-conceal.normall("img_set1_wa")
+conceal.collage(conf, "img_set1_wa_normalized", "results/collage0.png")
 
-conceal.collage("img_set1_wa_normalized", "results/collage0.png")
+conceal.normone(conf, "results/collage0.png", "results/collage0.png")
 
-conceal.normone("results/collage0.png", "results/collage0.png")
-
-colors1 = conceal.palette("results/collage0.png", "results/collage0_colors.png")
+colors1 = conceal.palette(conf, "results/collage0.png", "results/collage0_colors.png")
+# colors2 = conceal.palette("results/collage1.png", "results/collage1colors.png")
+w = conf["noise"]["width"]
+h = conf["noise"]["height"]
 
 conceal.gni(
     w,
     h,
-    conceal.genrnoise(w, h),
-    0.60,
-    conceal.gensnoise(w, h),
-    0.30,
-    conceal.genpnoise(w, h),
-    0.10,
+    conceal.genrnoise(conf, w, h),
+    conf["noise"]["randomweight"],
+    conceal.gensnoise(conf, w, h),
+    conf["noise"]["simplexweight"],
+    conceal.genpnoise(conf, w, h),
+    conf["noise"]["perlinweight"],
 )
 
-conceal.colshft(colors1, "results/noise.png")
-conceal.dith("results/quant1.png", "results/dith1.png")
+conceal.colshft(conf, colors1, "results/noise.png", "results/colorshift.png")
+conceal.dith(conf, "results/colorshift.png", "results/dither.png")
 
-conceal.voronoi(500, 500, 1000, "results/quant2.png")
+conceal.voronoi(conf, "results/dither.png")
 

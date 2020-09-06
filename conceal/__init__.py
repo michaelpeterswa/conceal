@@ -1,4 +1,4 @@
-from conceal import loader
+from conceal import config
 from conceal import normalize
 from conceal import collage
 from conceal import palette
@@ -7,6 +7,7 @@ from conceal import colorshift
 from conceal import dither
 from conceal import voronoi
 
+config = config.configure
 normall = normalize.normalize
 normone = normalize.normalize_one
 collage = collage.collage

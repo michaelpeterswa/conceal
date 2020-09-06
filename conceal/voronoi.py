@@ -5,7 +5,11 @@ import random
 import math
 
 
-def genvoronoi(width, height, num_cells, image):
+def genvoronoi(conf, image):
+
+    height = conf["voronoi"]["height"]
+    width = conf["voronoi"]["width"]
+    num_cells = conf["voronoi"]["cells"]
 
     baseimg = Image.open(image)
     rgbbase = baseimg.convert("RGB")

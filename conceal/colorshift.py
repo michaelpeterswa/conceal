@@ -1,10 +1,12 @@
 from PIL import ImagePalette, Image
+import colorsys
+import numpy as np
 
 
-def colorshift(image_palette, image_to_quant):
+def colorshift(conf, image_palette, image_to_quant, save):
+
     img = image_to_quant
-    # color_palette = Image.open(image_palette)
     im = Image.open(img)
     conv = im.convert("P")
     conv.putpalette(image_palette)
-    conv.save("results/quant1.png")
+    conv.save(save)
