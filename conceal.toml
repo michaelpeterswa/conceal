@@ -14,7 +14,7 @@ width = 400
 height = 400
 
 [palette]
-colors = 8
+colors = 16
 
 [finalcolors]
 amount = 6
@@ -33,4 +33,4 @@ frequency = 10.0
 [voronoi]
 width = 500
 height = 500
-cells = 25
+cells = 2000
