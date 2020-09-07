@@ -3,6 +3,17 @@
 title = "conceal.toml"
 ver = "0.0.1"
 
+[files]
+imagefolder = "img_set1_wa"
+resultfolder = "results"
+normalized = "img_set1_wa_normalized"
+collage = "collage.png"
+colors = "colors.png"
+noise = "noise.png"
+colorshift = "colorshift.png"
+dither = "dither.png"
+output = "voronoi.png"
+
 [normalize]
 width_all = 400
 height_all = 400
@@ -13,24 +24,21 @@ height_one = 1000
 width = 400
 height = 400
 
-[palette]
-colors = 16
-
-[finalcolors]
-amount = 6
+[colors]
+palette = 16
+noise = 10
+dither = 6
 
 [noise]
 width = 500
 height = 500
-randomweight = 0.0
-perlinweight = 0.7
-simplexweight = 0.3
+randomweight = 0.02
+perlinweight = 0.4
+simplexweight = 0.58
 
 [perlin]
-octaves = 7
-frequency = 10.0 
+octaves = 10
+frequency = 30.0 
 
 [voronoi]
-width = 500
-height = 500
-cells = 2000
+cells = 1000

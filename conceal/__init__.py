@@ -6,7 +6,9 @@ from conceal import noise
 from conceal import colorshift
 from conceal import dither
 from conceal import voronoi
+from conceal import runner
 
+runner = runner.run
 config = config.configure
 normall = normalize.normalize
 normone = normalize.normalize_one

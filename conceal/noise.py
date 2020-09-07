@@ -1,11 +1,14 @@
 import numpy as np
 from PIL import Image
 from opensimplex import OpenSimplex
-from noise import snoise2
+from noise import pnoise2
+import time
+import conceal
 
 
-def generateRandomNoise(conf, w, h):
+def generateRandomNoise(conf):
 
+    (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
     num_samples = w * h
     num_bins = 255
 
@@ -13,12 +16,13 @@ def generateRandomNoise(conf, w, h):
     return np.random.random(size=num_samples)
 
 
-def generateSimplexNoise(conf, w, h):
+def generateSimplexNoise(conf):
 
+    (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
     num_samples = w * h
 
     arr = []
-    simp = OpenSimplex()
+    simp = OpenSimplex(seed=int(time.time()))
 
     for y in range(0, h):
         for x in range(0, w):
@@ -27,8 +31,9 @@ def generateSimplexNoise(conf, w, h):
     return arr
 
 
-def generatePerlinNoise(conf, w, h):
+def generatePerlinNoise(conf):
 
+    (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
     num_samples = w * h
 
     octaves = conf["perlin"]["octaves"]
@@ -38,15 +43,20 @@ def generatePerlinNoise(conf, w, h):
 
     for y in range(0, h):
         for x in range(0, w):
-            arr.append(snoise2(x / freq, y / freq, octaves))
+            arr.append(pnoise2(x / freq, y / freq, octaves))
 
     return arr
 
 
-def generateNoiseImage(w, h, arr1, weight1, arr2, weight2, arr3, weight3):
+def generateNoiseImage(conf):
 
+    (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
     num_samples = w * h
     final_values = []
+
+    random = conceal.genrnoise(conf)
+    perlin = conceal.genpnoise(conf)
+    simplex = conceal.gensnoise(conf)
 
     static_val = np.empty(num_samples)
     static_val.fill(0.5)
@@ -57,9 +67,9 @@ def generateNoiseImage(w, h, arr1, weight1, arr2, weight2, arr3, weight3):
     for a in range(0, w * h):
         final_values.append(
             (
-                (arr1[a] * weight1)
-                + (((arr2[a] / 2) + 0.5) * weight2)
-                + (((arr3[a] / 2) + 0.5) * weight3)
+                (random[a] * conf["noise"]["randomweight"])
+                + (((simplex[a] / 2) + 0.5) * conf["noise"]["simplexweight"])
+                + (((perlin[a] / 2) + 0.5) * conf["noise"]["perlinweight"])
             )
             / 3
         )
@@ -71,6 +81,7 @@ def generateNoiseImage(w, h, arr1, weight1, arr2, weight2, arr3, weight3):
     hsv_img = np.dstack([h_samples, s_samples, v_samples])
 
     image = Image.fromarray(np.uint8(hsv_img * 255), mode="HSV").convert("RGB")
-    image = image.quantize(colors=6)
+    image = image.quantize(colors=conf["colors"]["noise"])
     image.convert(mode="RGB")
-    image.save("results/noise.png")
+    image.save(conf["files"]["resultfolder"] + "/" + conf["files"]["noise"])
+    print("Created Noise Image: ✔")

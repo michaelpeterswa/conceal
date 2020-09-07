@@ -10,11 +10,11 @@ import random
 import math
 
 
-def collage(conf, directory, save):
-    images = os.listdir(directory)
+def collage(conf):
+    images = os.listdir(conf["files"]["normalized"])
 
-    if not (os.path.isdir("results/")):
-        os.mkdir("results/")
+    if not (os.path.isdir(conf["files"]["resultfolder"])):
+        os.mkdir(conf["files"]["resultfolder"])
 
     aspect = 1.77  # Aspect ratio of the output image
 
@@ -33,8 +33,9 @@ def collage(conf, directory, save):
             # Fill in extra images by duplicating some images randomly
             if i >= len(images):
                 i = random.randrange(len(images))
-            p = Image.open(directory + "/" + images[i])
+            p = Image.open(conf["files"]["normalized"] + "/" + images[i])
             collage.paste(p, (x * w, y * h))
             p.close()
-    collage.save(save)
+    collage.save(conf["files"]["resultfolder"] + "/" + conf["files"]["collage"])
     collage.close()
+    print("Created Collage: ✔")

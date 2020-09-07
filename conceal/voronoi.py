@@ -3,15 +3,16 @@
 from PIL import Image
 import random
 import math
+from tqdm import tqdm
 
 
-def genvoronoi(conf, image):
+def genvoronoi(conf):
 
-    height = conf["voronoi"]["height"]
-    width = conf["voronoi"]["width"]
+    height = conf["noise"]["height"]
+    width = conf["noise"]["width"]
     num_cells = conf["voronoi"]["cells"]
 
-    baseimg = Image.open(image)
+    baseimg = Image.open(conf["files"]["resultfolder"] + "/" + conf["files"]["dither"])
     rgbbase = baseimg.convert("RGB")
     image = Image.new("RGB", (width, height))
     putpixel = image.putpixel
@@ -21,14 +22,14 @@ def genvoronoi(conf, image):
     nr = []
     ng = []
     nb = []
-    for i in range(num_cells):
-        nx.append(random.randrange(imgx))
-        ny.append(random.randrange(imgy))
+    for i in tqdm(range(num_cells), desc="Creating Points"):
+        nx.append(random.randrange(1, imgx))
+        ny.append(random.randrange(1, imgy))
         rgb = rgbbase.getpixel((nx[i], ny[i]))
         nr.append(rgb[0])
         ng.append(rgb[1])
         nb.append(rgb[2])
-    for y in range(imgy):
+    for y in tqdm(range(imgy), desc="Tessellating"):
         for x in range(imgx):
             dmin = math.hypot(imgx - 1, imgy - 1)
             j = -1
@@ -38,5 +39,6 @@ def genvoronoi(conf, image):
                     dmin = d
                     j = i
             putpixel((x, y), (nr[j], ng[j], nb[j]))
-    image.save("results/voronoi.png", "PNG")
+    print("Tessellated Camouflage Pattern: ✔")
+    image.save(conf["files"]["resultfolder"] + "/" + conf["files"]["output"], "PNG")
 

@@ -3,11 +3,13 @@ import numpy as np
 from PIL import Image
 
 
-def generate(conf, image, save):
-    color_thief = ColorThief(image)
+def generate(conf):
+    color_thief = ColorThief(
+        conf["files"]["resultfolder"] + "/" + conf["files"]["collage"]
+    )
 
     # https://stackoverflow.com/questions/56069551/trying-to-display-list-of-rgb-values
-    barColors = color_thief.get_palette(color_count=conf["palette"]["colors"])
+    barColors = color_thief.get_palette(color_count=conf["colors"]["palette"])
     barColors = (np.array(barColors)).astype(np.uint8)
     cols = len(barColors)
     rows = max([1, int(cols / 2.5)])
@@ -18,6 +20,6 @@ def generate(conf, image, save):
     barImg = Image.fromarray(barFullData, "RGB")
 
     # saving image
-    barImg.save(save)
-
+    barImg.save(conf["files"]["resultfolder"] + "/" + conf["files"]["colors"])
+    print("Generated Color Palette: ✔")
     return barColors
