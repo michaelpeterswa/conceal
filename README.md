@@ -23,12 +23,16 @@
   <img alt="Made With Love" src="https://img.shields.io/badge/Made%20With-Love-orange.svg">
 	<img alt="Awesome" src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg">
 </p>
+<h6 align="center">
+1. collage, 2. noise, 3. palette swap, 4. voronoi tesellation
+</h6>
 <h1 align="center">
 	<img
 		width="400"
 		alt="QSML"
 		src="img/collage.png">
 </h1>
+
 
 ## Information
 
