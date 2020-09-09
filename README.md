@@ -13,7 +13,7 @@
 		•
 		<a href="https://medium.com/@thesjef/introducing-the-national-algorithm-b9570df083a4">The National Algorithm</a>
 		•
-		<a href="https://repository.tudelft.nl/view/tno/uuid:ea8d8f5b-05d9-4070-8e9d-267849dabef1">TU Delft White Paper</a>
+		<a href="https://repository.tudelft.nl/view/tno/uuid:ea8d8f5b-05d9-4070-8e9d-267849dabef1">TNO White Paper (Hosted by TU Delft)</a>
 	</strong>
 </p>
 <p align="center">
