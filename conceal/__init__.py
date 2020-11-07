@@ -1,3 +1,4 @@
+# import each module
 from conceal import config
 from conceal import normalize
 from conceal import collage
@@ -7,7 +8,9 @@ from conceal import colorshift
 from conceal import dither
 from conceal import voronoi
 from conceal import runner
+from .const import *
 
+# associate module functions with their package counterpart
 runner = runner.run
 config = config.configure
 normall = normalize.normalize

@@ -4,9 +4,9 @@ title = "conceal.toml"
 ver = "0.0.1"
 
 [files]
-imagefolder = "img_set1_wa"
+imagefolder = "environment"
 resultfolder = "results"
-normalized = "img_set1_wa_normalized"
+normalized = "env_norm"
 collage = "collage.png"
 colors = "colors.png"
 noise = "noise.png"
@@ -26,19 +26,19 @@ height = 400
 
 [colors]
 palette = 16
-noise = 10
-dither = 6
+noise = 16
+dither = 5
 
 [noise]
 width = 500
 height = 500
-randomweight = 0.02
-perlinweight = 0.4
-simplexweight = 0.58
+randomweight = 0.00
+perlinweight = 0.6
+simplexweight = 0.4
 
 [perlin]
 octaves = 10
-frequency = 30.0 
+frequency = 15.0 
 
 [voronoi]
-cells = 1000
+cells = 3000
