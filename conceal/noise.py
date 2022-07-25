@@ -10,7 +10,6 @@ def generateRandomNoise(conf):
 
     (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
     num_samples = w * h
-    num_bins = 255
 
     # for pix in num_samples:
     return np.random.random(size=num_samples)
@@ -19,14 +18,13 @@ def generateRandomNoise(conf):
 def generateSimplexNoise(conf):
 
     (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
-    num_samples = w * h
 
     arr = []
     simp = OpenSimplex(seed=int(time.time()))
 
     for y in range(0, h):
         for x in range(0, w):
-            arr.append(simp.noise2d(x / 40, y / 40))
+            arr.append(simp.noise2(x / 40, y / 40))
 
     return arr
 
@@ -34,7 +32,6 @@ def generateSimplexNoise(conf):
 def generatePerlinNoise(conf):
 
     (w, h) = (conf["noise"]["width"], conf["noise"]["height"])
-    num_samples = w * h
 
     octaves = conf["perlin"]["octaves"]
     freq = conf["perlin"]["frequency"] * octaves

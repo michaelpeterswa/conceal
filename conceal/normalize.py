@@ -10,7 +10,6 @@ def normalize(conf):
     for img in images:
         image = conf["files"]["imagefolder"] + "/" + img
         im = Image.open(image)
-        sqrWidth = np.ceil(np.sqrt(im.size[0] * im.size[1])).astype(int)
         im_resize = im.resize(
             (conf["normalize"]["height_all"], conf["normalize"]["width_all"])
         )
@@ -22,7 +21,6 @@ def normalize(conf):
 def normalize_one(conf):
     path = conf["files"]["resultfolder"] + "/" + conf["files"]["collage"]
     im = Image.open(path)
-    sqrWidth = np.ceil(np.sqrt(im.size[0] * im.size[1])).astype(int)
     im_resize = im.resize(
         (conf["normalize"]["height_one"], conf["normalize"]["width_one"])
     )

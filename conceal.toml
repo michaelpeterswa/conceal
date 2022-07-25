@@ -25,20 +25,20 @@ width = 400
 height = 400
 
 [colors]
-palette = 16
+palette = 32
 noise = 10
-dither = 6
+dither = 16
 
 [noise]
 width = 500
 height = 500
 randomweight = 0.02
-perlinweight = 0.4
-simplexweight = 0.58
+perlinweight = 0.5
+simplexweight = 0.48
 
 [perlin]
 octaves = 10
 frequency = 30.0 
 
 [voronoi]
-cells = 1000
+cells = 500
